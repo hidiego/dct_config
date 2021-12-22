@@ -1,4 +1,4 @@
 #!/bin/bash
 
-sleep 2
+sleep 3
 volumeicon
