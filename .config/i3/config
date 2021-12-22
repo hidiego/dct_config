@@ -173,3 +173,5 @@ bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
 
 # fix start volumeicon
 exec --no-startup-id $HOME/.scripts/init_volumeicon.sh
+
+bindsym $mod+Ctrl+l exec --no-startup-id i3lock -t -i $HOME/dct_config/wallpapers/lock_screen.png && systemctl suspend
