@@ -1,0 +1,4 @@
+{
+    "clangd.semanticHighlighting": false,
+    "coc.preferences.semanticTokensHighlights": false
+}
