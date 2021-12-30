@@ -5,6 +5,7 @@ font pango:MesloLGS NF 10
 
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id nm-applet --autostart
+exec --no-startup-id xset -dpms
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -168,7 +169,8 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute s
 # move workspace to output
 bindsym $mod+Ctrl+Shift+Right move workspace to output right
 bindsym $mod+Ctrl+Shift+Left move workspace to output left
-bindsym $mod+0 exec --no-startup-id poweroff
+bindsym $mod+0 exec --no-startup-id reboot
+bindsym $mod+Shift+0 exec --no-startup-id poweroff
 
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +5%
@@ -180,7 +182,15 @@ exec --no-startup-id slack
 exec --no-startup-id xsetroot -solid "#333333"
 
 bindsym $mod+Ctrl+l exec --no-startup-id i3lock -t -i $HOME/dct_config/wallpapers/lock_screen.png && systemctl suspend
+# open github.com/defich/ain
+bindsym $mod+Shift+f exec --no-startup-id firefox https://github.com/defich/ain
+# open Telegram
+bindsym $mod+Shift+t exec --no-startup-id telegram-desktop
 
+# sceeenshot
+bindsym Print exec --no-startup-id i3-scrot
+bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
+bindsym $mod+Ctrl+s --release exec --no-startup-id i3-scrot -sc
 #################
 # THEME gruvbox #
 #################

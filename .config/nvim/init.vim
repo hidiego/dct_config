@@ -12,7 +12,6 @@ set shiftwidth=4
 " On pressing tab, insert 4 spaces
 set expandtab
 
-
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -22,6 +21,8 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'flazz/vim-colorschemes'
 Plug 'tpope/vim-fugitive'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+Plug 'honza/vim-snippets'
+Plug 'KabbAmine/vCoolor.vim'
 call plug#end()
 colorscheme gruvbox
 
@@ -42,6 +43,8 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 EOF
+" delete search highlight
+nnoremap <esc> :noh<return><esc>
 
 " NERDTree
 map <C-n> :NERDTreeToggle<CR>
@@ -61,6 +64,18 @@ let g:strip_whitespace_on_save=1
 nmap <leader>gh :diffget //3<CR>
 nmap <leader>gu :diffget //2<CR>
 nmap <leader>gs :G<CR>
+
+" clipboar copy/paste
+" " Copy to clipboard
+vnoremap  <leader>y  "+y
+nnoremap  <leader>Y  "+yg_
+nnoremap  <leader>y  "+y
+nnoremap  <leader>yy "+yy
+" " Paste from clipboard<CR>
+nnoremap  <leader>p  "+p
+vnoremap  <leader>p  "+p
+nnoremap  <leader>P  "+P
+vnoremap  <leader>P  "+P
 
 " Coc
 " Set internal encoding of vim, not needed on neovim, since coc.nvim using some
@@ -204,3 +219,17 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+" coc-snipet tab usage
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
