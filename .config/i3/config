@@ -5,13 +5,14 @@ font pango:MesloLGS NF 10
 
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id nm-applet --autostart
-exec --no-startup-id xset -dpms
+exec --no-startup-id xfce4-power-manager --daemon
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Shift+w exec $HOME/dct_config/tmuxain.sh
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -83,6 +84,8 @@ set $ws8 "8"
 set $ws9 "9"
 
 assign [class="Slack"] $ws1
+assign [class="Telegram"] $ws4
+assign [class="firefox"] $ws2
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -169,19 +172,21 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute s
 # move workspace to output
 bindsym $mod+Ctrl+Shift+Right move workspace to output right
 bindsym $mod+Ctrl+Shift+Left move workspace to output left
+
 bindsym $mod+0 exec --no-startup-id reboot
 bindsym $mod+Shift+0 exec --no-startup-id poweroff
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +5%
-bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +2%
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 2%-
 
 # fix start volumeicon
 exec --no-startup-id $HOME/.scripts/init_volumeicon.sh
 exec --no-startup-id slack
 exec --no-startup-id xsetroot -solid "#333333"
 
-bindsym $mod+Ctrl+l exec --no-startup-id i3lock -t -i $HOME/dct_config/wallpapers/lock_screen.png && systemctl suspend
+bindsym $mod+Ctrl+l exec --no-startup-id i3lock -t -u -p win -i $HOME/dct_config/wallpapers/lock_screen.png
+bindsym $mod+Ctrl+Shift+l exec --no-startup-id i3lock -t -u -p win -i $HOME/dct_config/wallpapers/lock_screen.png && systemctl suspend
 # open github.com/defich/ain
 bindsym $mod+Shift+f exec --no-startup-id firefox https://github.com/defich/ain
 # open Telegram

@@ -3,7 +3,13 @@ set number
 set background=dark
 let g:mapleader="\<Space>"
 set go+=!
-set statusline+=%F
+let gitBranch=system("git rev-parse --abbrev-ref HEAD")
+set laststatus=2
+set statusline=%F%m%r%h%w\ [POS=%04l,%04v]\ [%p%%]\ [LEN=%L]
+if stridx(gitBranch, "not") == -1
+    execute "set statusline +=" . gitBranch
+endif
+" set statusline+=%F
 filetype plugin indent on
 " show existing tab with 4 spaces width
 set tabstop=4
@@ -13,16 +19,19 @@ set shiftwidth=4
 set expandtab
 
 call plug#begin('~/.vim/plugged')
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'preservim/nerdtree'
-Plug 'ntpeters/vim-better-whitespace'
-Plug 'flazz/vim-colorschemes'
-Plug 'tpope/vim-fugitive'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
-Plug 'honza/vim-snippets'
-Plug 'KabbAmine/vCoolor.vim'
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'preservim/nerdtree'
+    Plug 'ntpeters/vim-better-whitespace'
+    Plug 'flazz/vim-colorschemes'
+    Plug 'tpope/vim-fugitive'
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+    Plug 'honza/vim-snippets'
+    Plug 'SirVer/ultisnips'
+    Plug 'mlaursen/vim-react-snippets'
+    Plug 'KabbAmine/vCoolor.vim'
+    Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 call plug#end()
 colorscheme gruvbox
 
@@ -53,6 +62,7 @@ map <C-n> :NERDTreeToggle<CR>
 nnoremap <silent> <C-p> :Files<CR>
 nnoremap <silent> <C-g> :GF?<CR>
 nnoremap <silent> <C-o> :Buffers<CR>
+command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
 nnoremap <C-f> :Rg! <CR>
 let g:fzf_layout = { 'down': '70%' }
 
@@ -61,9 +71,10 @@ let g:better_whitespace_enabled=1
 let g:strip_whitespace_on_save=1
 
 " Fugitive
-nmap <leader>gh :diffget //3<CR>
-nmap <leader>gu :diffget //2<CR>
+nmap <leader>gm :diffget //3<CR>
+nmap <leader>gt :diffget //2<CR>
 nmap <leader>gs :G<CR>
+nmap <leader>gv :Gvdiff<CR>
 
 " clipboar copy/paste
 " " Copy to clipboard
@@ -89,9 +100,8 @@ set hidden
 set nobackup
 set nowritebackup
 
-
 " Give more space for displaying messages.
-set cmdheight=2
+set cmdheight=1
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.

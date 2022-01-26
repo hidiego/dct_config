@@ -10,6 +10,7 @@ plugins=(
 	fzf
     zsh-syntax-highlighting
     colored-man-pages
+    docker
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -19,6 +20,10 @@ alias cw="cd $HOME/workspace/ain && vim"
 alias audiofix="$HOME/.scripts/init_volumeicon.sh > /dev/null 2>&1 &"
 alias python3="python"
 alias open="xdg-open"
+alias workweb="$HOME/dct_config/tmuxsimple.sh $HOME/workspace/web/paula-react-redux"
+alias ls="exa --icons"
+
 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+source /usr/share/nvm/init-nvm.sh

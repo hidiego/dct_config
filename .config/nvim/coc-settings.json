@@ -1,4 +1,8 @@
 {
     "clangd.semanticHighlighting": false,
-    "coc.preferences.semanticTokensHighlights": false
+    "coc.preferences.semanticTokensHighlights": false,
+    "emmet.includeLanguages": {
+      "javascript": "javascriptreact"
+    },
+    "python.pythonPath": "python3"
 }
