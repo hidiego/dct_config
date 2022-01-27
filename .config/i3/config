@@ -1,7 +1,7 @@
 # mod key win
 set $mod Mod4
 
-font pango:MesloLGS NF 10
+font pango:"Meslo LG L DZ for Powerline" Bold 11
 
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id nm-applet --autostart

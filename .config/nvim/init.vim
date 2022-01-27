@@ -32,6 +32,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'mlaursen/vim-react-snippets'
     Plug 'KabbAmine/vCoolor.vim'
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+    Plug 'ferrine/md-img-paste.vim'
 call plug#end()
 colorscheme gruvbox
 
@@ -87,6 +88,13 @@ nnoremap  <leader>p  "+p
 vnoremap  <leader>p  "+p
 nnoremap  <leader>P  "+P
 vnoremap  <leader>P  "+P
+
+" MD paste
+autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
+
+" MDPreview
+let g:mkdp_page_title = '${name}'
+let g:mkdp_browser = 'chromium'
 
 " Coc
 " Set internal encoding of vim, not needed on neovim, since coc.nvim using some
